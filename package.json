@@ -6,7 +6,8 @@
   "author": "Van Pho Nguyen <vanpho02@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "mocha": "^4.0.1"
+    "mocha": "^4.0.1",
+    "supertest": "^3.0.0"
   },
   "scripts": {
     "test": "NODE_ENV=test nodemon --exec mocha -R min --recursive",
