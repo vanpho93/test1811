@@ -7,6 +7,11 @@ const storySchema = new mongoose.Schema({
 
 const StoryModel = mongoose.model('Story', storySchema);
 
-class Story extends StoryModel {}
+class Story extends StoryModel {
+    static addStory(title, content) {
+        const story = new Story({ content, title });
+        return story.save()
+    }
+}
 
 module.exports = Story;

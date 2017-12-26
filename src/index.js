@@ -15,8 +15,7 @@ app.get('/story', (req, res) => {
 
 app.post('/story', parser, (req, res) => {
     const { content, title } = req.body;
-    const story = new Story({ content, title });
-    story.save()
+    Story.addStory(title, content)
     .then(newStory => res.send({ success: true, story: newStory }))
     .catch(error => res.send({ success: false, error: error.message }));
 });
