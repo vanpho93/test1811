@@ -9,7 +9,7 @@
     "mocha": "^4.0.1"
   },
   "scripts": {
-    "test": "NODE_ENV=test nodemon --exec mocha --recursive",
+    "test": "NODE_ENV=test nodemon --exec mocha -R min --recursive",
     "server": "nodemon src/index.js"
   },
   "dependencies": {
