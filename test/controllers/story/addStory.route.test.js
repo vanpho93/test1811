@@ -16,4 +16,13 @@ describe('Test POST /story', () => {
         assert.equal(story.title, 'JS');
         assert.equal(story.content, 'Javascript');
     });
+
+    it('Cannot add 2 story with same title', async () => {
+        await Story.addStory('PHP', 'PHP 321123');
+        const response = await request(app)
+        .post('/story')
+        .type('form')
+        .send({ content: 'Javascript', title: 'PHP' });
+        assert.equal(response.body.success, false);
+    });
 });
