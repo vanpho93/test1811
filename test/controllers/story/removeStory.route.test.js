@@ -3,7 +3,7 @@ const request = require('supertest');
 const Story = require('../../../src/models/Story');
 const app = require('../../../src/app');
 
-describe.only('Test DELETE /story:id', () => {
+describe('Test DELETE /story:id', () => {
     let _id;
     beforeEach('Create 2 stories for test', async () => {
         await Story.addStory('PHP', 'java');
