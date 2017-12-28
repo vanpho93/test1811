@@ -24,6 +24,7 @@ describe('Test POST /story', () => {
         .type('form')
         .send({ content: 'Javascript', title: 'PHP' });
         assert.equal(response.body.success, false);
+        assert.equal(response.status, 400);
         const story = await Story.findOne({});
         const num = await Story.count({});
         assert.equal(story.content, 'PHP 321123');

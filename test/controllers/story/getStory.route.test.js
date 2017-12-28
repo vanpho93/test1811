@@ -3,7 +3,7 @@ const request = require('supertest');
 const Story = require('../../../src/models/Story');
 const app = require('../../../src/app');
 
-describe.only('Test GET /story ', () => {
+describe('Test GET /story ', () => {
     it('Can get all story', async () => {
         await Story.addStory('JS', 'Javascript');
         await Story.addStory('ES6', 'Javascript ES6');
@@ -11,5 +11,9 @@ describe.only('Test GET /story ', () => {
         const response = await request(app).get('/story');
         assert.equal(response.body.success, true);
         assert.equal(response.body.stories.length, 3);
+    });
+
+    it('Can get story with id', async () => {
+
     });
 });
