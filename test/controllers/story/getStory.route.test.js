@@ -1,0 +1,15 @@
+const assert = require('assert');
+const request = require('supertest');
+const Story = require('../../../src/models/Story');
+const app = require('../../../src/app');
+
+describe.only('Test GET /story ', () => {
+    it('Can get all story', async () => {
+        await Story.addStory('JS', 'Javascript');
+        await Story.addStory('ES6', 'Javascript ES6');
+        await Story.addStory('PHP', 'PHP 123 ES6');
+        const response = await request(app).get('/story');
+        assert.equal(response.body.success, true);
+        assert.equal(response.body.stories.length, 3);
+    });
+});
