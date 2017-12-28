@@ -3,7 +3,7 @@ const request = require('supertest');
 const Story = require('../../../src/models/Story');
 const app = require('../../../src/app');
 
-describe.only('Test GET /story ', () => {
+describe('Test GET /story ', () => {
     it('Can get all story', async () => {
         await Story.addStory('JS', 'Javascript');
         await Story.addStory('ES6', 'Javascript ES6');
