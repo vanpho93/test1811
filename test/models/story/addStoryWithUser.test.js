@@ -2,7 +2,7 @@ const assert = require('assert');
 const Story = require('../../../src/models/Story');
 const User = require('../../../src/models/User');
 
-describe.only('Test add new story with user', () => {
+xdescribe('Test add new story with user', () => {
     let _id;
     beforeEach('Create a user for test', async () => {
         const user = new User({ email: 'pho@gmail.com', name: 'Pho' });
