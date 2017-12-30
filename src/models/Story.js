@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const User = require('./User');
 
 const storySchema = new mongoose.Schema({
     author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
@@ -12,6 +13,13 @@ class Story extends StoryModel {
     static addStory(title, content) {
         const story = new Story({ content, title });
         return story.save()
+    }
+
+    static async addStoryWithUser(idUser, title, content) {
+        const story = new Story({ title: 'JS', content: 'Javascript', author: idUser });
+        await story.save();
+        await User.findByIdAndUpdate(idUser, { $push: { stories: story._id } });
+        return story;
     }
 }
 
