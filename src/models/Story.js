@@ -16,7 +16,7 @@ class Story extends StoryModel {
     }
 
     static async addStoryWithUser(idUser, title, content) {
-        const story = new Story({ title: 'JS', content: 'Javascript', author: idUser });
+        const story = new Story({ title, content, author: idUser });
         await story.save();
         await User.findByIdAndUpdate(idUser, { $push: { stories: story._id } });
         return story;
