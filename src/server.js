@@ -11,11 +11,12 @@ app.use(session({
 }));
 
 app.get('/muave', (req, res) => {
+    req.session.daMuaVe = true;
     res.send('Da mua ve');
 });
 
 app.get('/vaorap', (req, res) => {
-    if (true) return res.send('Moi xem phim');
+    if (req.session.daMuaVe) return res.send('Moi xem phim');
     res.send('Ban phai mua ve');
 });
 
