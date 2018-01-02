@@ -1,18 +1,21 @@
 const express = require('express');
-const cookieParser = require('cookie-parser');
+const session = require('express-session');
 
 const app = express();
 
-app.use(cookieParser()); 
+app.use(session({
+    secret: 'akjf183382473',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 20000 }
+}));
 
 app.get('/muave', (req, res) => {
-    res.cookie('DA_MUA_VE', 1);
-    daMuaVe = true;
     res.send('Da mua ve');
 });
 
 app.get('/vaorap', (req, res) => {
-    if (req.cookies.DA_MUA_VE) return res.send('Moi xem phim');
+    if (true) return res.send('Moi xem phim');
     res.send('Ban phai mua ve');
 });
 
