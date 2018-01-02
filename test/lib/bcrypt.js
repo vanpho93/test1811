@@ -16,7 +16,7 @@ xdescribe('Test hash bcrypt', () => {
     });
 });
 
-describe.only('Test compare bcrypt', () => {
+describe('Test compare bcrypt', () => {
     let encrypted;
     beforeEach('Hash a password for test', async () => {
         encrypted = await hash('1234', 8);
