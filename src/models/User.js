@@ -27,7 +27,7 @@ class User extends UserModel {
         if (!same) throw new Error('Password is incorrect');
         const u = user.toObject();
         delete u.password;
-        const token = await sign({ _id: u.id });
+        const token = await sign({ _id: u._id });
         u.token = token;
         return u;
     }
