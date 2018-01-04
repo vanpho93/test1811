@@ -32,16 +32,16 @@ router.post('/', parser, (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-    // verify(token)
-    // .then(obj => Story.findByIdAndRemove(req.params.id))
-    // .then(story => {
-    //     if (!story) return res.status(404).send({
-    //         success: false,
-    //         message: 'Cannot find story'
-    //     });
-    //     res.send({ success: true, story });
-    // })
-    // .catch(err => res.status(400).send({ success: false, error: error.message }))
+    verify(req.headers.token)
+    .then(obj => Story.findByIdAndRemove(req.params.id))
+    .then(story => {
+        if (!story) return res.status(404).send({
+            success: false,
+            message: 'Cannot find story'
+        });
+        res.send({ success: true, story });
+    })
+    .catch(error => res.status(400).send({ success: false, error: error.message }))
 });
 
 module.exports = router;
