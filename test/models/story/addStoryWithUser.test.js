@@ -2,12 +2,11 @@ const assert = require('assert');
 const Story = require('../../../src/models/Story');
 const User = require('../../../src/models/User');
 
-xdescribe('Test add new story with user', () => {
+describe('Test add new story with user', () => {
     let _id;
     beforeEach('Create a user for test', async () => {
-        const user = new User({ email: 'pho@gmail.com', name: 'Pho' });
+        const user = await User.signUp('pho1@gmail.com', '123', 'Pho');
         _id = user._id;
-        await user.save();
     });
 
     it('Can add story for a user', async () => {

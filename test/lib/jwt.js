@@ -2,7 +2,7 @@ const assert = require('assert');
 const jwt = require('jsonwebtoken');
 const { sign, verify } = require('../../src/lib/jwt');
 
-describe.only('Test create and verify token', () => {
+describe('Test create and verify token', () => {
     it('Create new token', done => {
         jwt.sign({ name: 'Teo' }, 'JFHWHe97rcndsajh', { expiresIn: '2h' }, (err, token) => {
             assert.equal(err, null);
@@ -21,7 +21,7 @@ describe.only('Test create and verify token', () => {
     });
 });
 
-describe.only('Sign and Decode token', () => {
+describe('Sign and Decode token', () => {
     it ('Can sign and verify by methods', async () => {
         const token = await sign({ name: 'Teo' });
         const obj = await verify(token);

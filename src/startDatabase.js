@@ -7,7 +7,7 @@ function getDatabaseUri() {
     return 'mongodb://localhost/mean1811';
 }
 
-mongoose.connect(getDatabaseUri())
+mongoose.connect(getDatabaseUri(), { useMongoClient: true })
 .catch(err => {
     console.log(err.message);
     process.exit(1);

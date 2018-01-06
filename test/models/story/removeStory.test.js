@@ -2,14 +2,13 @@ const assert = require('assert');
 const Story = require('../../../src/models/Story');
 const User = require('../../../src/models/User');
 
-xdescribe('Test remove story', () => {
+describe('Test remove story', () => {
     let idUser;
     let idStory;
 
     beforeEach('Create a user for test', async () => {
-        const user = new User({ email: 'pho@gmail.com', name: 'Pho' });
+        const user = await User.signUp('pho@gmail.com', '123', 'Pho');
         idUser = user._id;
-        await user.save();
         const story = await Story.addStoryWithUser(idUser, 'JS', 'Javascript');
         await Story.addStoryWithUser(idUser, 'JS1', 'Javascript1');
         idStory = story._id;
