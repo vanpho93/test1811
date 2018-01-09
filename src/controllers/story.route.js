@@ -1,18 +1,9 @@
 const express = require('express');
 const parser = require('body-parser').urlencoded({ extended: false });
 const Story = require('../models/Story');
-const { verify } = require('../lib/jwt');
+const mustBeUser = require('./mustBeUser.middleware');
 
 const router = express.Router();
-
-const mustBeUser = (req, res, next) => {
-    verify(req.headers.token)
-    .then(obj => {
-        req.idUser = obj._id;
-        next();
-    })
-    .catch(error => res.status(400).send({ success: false, error: error.message }));
-}
 
 router.get('/', (req, res) => {
     Story.find({}).populate('author', 'name')

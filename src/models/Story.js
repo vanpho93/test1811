@@ -24,7 +24,10 @@ class Story extends StoryModel {
     }
 
     static async likeAStory(idUser, idStory) {
-        
+        const updateObject = { $addToSet: { fans: idUser } };
+        const story = await Story.findByIdAndUpdate(idStory, updateObject, { new: true });
+        if (!story) throw new Error('Cannot find story');
+        return story;
     }
 }
 
