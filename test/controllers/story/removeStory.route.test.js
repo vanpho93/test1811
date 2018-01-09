@@ -4,7 +4,7 @@ const Story = require('../../../src/models/Story');
 const User = require('../../../src/models/User');
 const app = require('../../../src/app');
 
-describe.only('Test DELETE /story:id', () => {
+describe('Test DELETE /story:id', () => {
     let token1, token2, storyId;
     beforeEach('Create user for test', async () => {
         await User.signUp('pho1@gmail.com', '123', 'Pho');
