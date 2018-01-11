@@ -10,13 +10,27 @@ describe.only('POST /comment', () => {
 
     beforeEach('Create user for test', async () => {
         await User.signUp('pho1@gmail.com', '123', 'Pho');
-        await User.signUp('pho2@gmail.com', '123', 'Pho');
+        await User.signUp('pho2@gmail.com', '123', 'Pho 2');
         const user1 = await User.signIn('pho1@gmail.com', '123');
         const user2 = await User.signIn('pho2@gmail.com', '123');
         const story = await Story.addStoryWithUser(user1._id, 'JS', 'Javascript');
         await Story.addStoryWithUser(user1._id, 'PHP', 'My SQL');
         token1 = user1.token;
         token2 = user2.token;
-        storyId = story._id;
+        storyId = story._id.toString();
+    });
+
+    it('Can create new comment for story', async () => {
+        const response = await request(app)
+        .post('/comment')
+        .set({ token: token2 })
+        .type('form')
+        .send({ content: 'MEAN1811', storyId });
+        assert.equal(response.status, 200);
+        assert.equal(response.body.success, true);
+        assert.equal(response.body.comment.content, 'MEAN1811');
+        const story = await Story.findById(storyId).populate('comments');
+        assert.equal(story.comments.length, 1);
+        assert.equal(story.comments[0].content, 'MEAN1811');
     });
 });

@@ -1,12 +1,10 @@
 const assert = require('assert');
 const { hash, compare } = require('bcrypt');
 
-describe('Test hash bcrypt', () => {
+xdescribe('Test hash bcrypt', () => {
     it('Can create new hash', async () => {
         const encrypted = await hash('1234', 8);
         const encrypted2 = await hash('1234', 8);
-        console.log(encrypted);
-        console.log(encrypted2);
     });
 
     it('Can create new hash with promise', async () => {
