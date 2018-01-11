@@ -35,14 +35,29 @@ describe.only('POST /comment', () => {
     });
 
     it('Cannot add comment without token', async () => {
-
+        const response = await request(app)
+        .post('/comment')
+        .type('form')
+        .send({ content: 'MEAN1811', storyId });
+        assert.equal(response.status, 400);
+        assert.equal(response.body.success, false);
     });
 
     it('Cannot add comment with wrong idStory', async () => {
-
+        const response = await request(app)
+        .post('/comment')
+        .type('form')
+        .send({ content: 'MEAN1811', storyId: 'jedq8eu02ie9ruifjdkac' });
+        assert.equal(response.status, 400);
+        assert.equal(response.body.success, false);
     });
 
     it('Cannot add comment without content', async () => {
-
+        const response = await request(app)
+        .post('/comment')
+        .type('form')
+        .send({ storyId });
+        assert.equal(response.status, 400);
+        assert.equal(response.body.success, false);
     });
 });
