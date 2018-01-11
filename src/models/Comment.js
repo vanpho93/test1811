@@ -21,6 +21,14 @@ class Comment extends CommentModel {
         await Story.findByIdAndUpdate(idStory, updateObject);
         return comment;
     }
+
+    static async removeComment(idUser, idComment) {
+        const comment = await Comment.findOneAndRemove({ _id: idComment, user: idUser });
+        if (!comment) throw new Error('Cannot find comment.');
+        const { _id, story } = comment;
+        await Story.findByIdAndUpdate(story, { $pull: { comments: _id } });
+        return comment;
+    }
 }
 
 module.exports = Comment;

@@ -11,4 +11,10 @@ router.post('/', mustBeUser, parser, (req, res) => {
     .catch(error => res.status(404).send({ success: false, message: error.message }));
 });
 
+router.delete('/:idComment', mustBeUser, (req, res) => {
+    Comment.removeComment(req.idUser, req.params.idComment)
+    .then(comment => res.send({ success: true, comment }))
+    .catch(error => res.status(404).send({ success: false, message: error.message }));
+});
+
 module.exports = router;
