@@ -12,7 +12,14 @@ const commentSchema = new mongoose.Schema({
 const CommentModel = mongoose.model('Comment', commentSchema);
 
 class Comment extends CommentModel {
-    static async createComment(idUser, idStory) {
+    static async createComment(idUser, idStory, content) {
+        const story = await Story.findById(idStory);
+        if (!story) throw new Error('Cannot find story');
+        const comment = new Comment({ user: idUser, content, story: idStory });
+        await comment.save();
+        const updateObject = { $push: { comments: comment._id } };
+        await Story.findByIdAndUpdate(idStory, updateObject);
+        return comment;
     }
 }
 
