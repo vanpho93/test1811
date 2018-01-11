@@ -5,7 +5,7 @@ const User = require('../../../src/models/User');
 const Comment = require('../../../src/models/Comment');
 const app = require('../../../src/app');
 
-describe.only('DELETE /comment/:id', () => {
+describe('DELETE /comment/:id', () => {
     let token1, token2, storyId, commentId;
 
     beforeEach('Create user for test', async () => {
@@ -35,14 +35,21 @@ describe.only('DELETE /comment/:id', () => {
     });
 
     it('Cannot remove comment with wrong token', async() => {
-
+        const response = await request(app)
+        .delete(`/comment/${commentId}`)
+        .set({ token: token1 });
+        assert.equal(response.body.success, false);
     });
 
     it('Cannot remove comment without token', async() => {
-
+        const response = await request(app)
+        .delete(`/comment/${commentId}`)
+        assert.equal(response.body.success, false);
     });
 
     it('Cannot remove comment with wrong commentId', async() => {
-
+        const response = await request(app)
+        .delete(`/comment/${commentId}x`)
+        assert.equal(response.body.success, false);
     });
 });
