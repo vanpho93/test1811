@@ -5,7 +5,7 @@ const User = require('../../../src/models/User');
 const Comment = require('../../../src/models/Comment');
 const app = require('../../../src/app');
 
-describe.only('POST /comment', () => {
+describe('POST /comment', () => {
     let token1, token2, storyId;
 
     beforeEach('Create user for test', async () => {
