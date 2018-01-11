@@ -33,4 +33,16 @@ describe.only('POST /comment', () => {
         assert.equal(story.comments.length, 1);
         assert.equal(story.comments[0].content, 'MEAN1811');
     });
+
+    it('Cannot add comment without token', async () => {
+
+    });
+
+    it('Cannot add comment with wrong idStory', async () => {
+
+    });
+
+    it('Cannot add comment without content', async () => {
+
+    });
 });
