@@ -29,6 +29,13 @@ class Comment extends CommentModel {
         await Story.findByIdAndUpdate(story, { $pull: { comments: _id } });
         return comment;
     }
+
+    static async likeComment(idUser, idComment) {
+        const updateObject = { $addToSet: { fans: idUser } };
+        const comment = await Comment.findByIdAndUpdate(idComment, updateObject, { new: true });
+        if (!comment) throw new Error('Cannot find comment.');
+        return comment;
+    }
 }
 
 module.exports = Comment;
