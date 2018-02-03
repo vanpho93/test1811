@@ -1,5 +1,5 @@
 const express = require('express');
-const parser = require('body-parser').urlencoded({ extended: false });
+const parser = require('body-parser').json();
 const { hash, compare } = require('bcrypt');
 const User = require('../models/User');
 

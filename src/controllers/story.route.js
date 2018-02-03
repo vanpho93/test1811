@@ -1,5 +1,5 @@
 const express = require('express');
-const parser = require('body-parser').urlencoded({ extended: false });
+const parser = require('body-parser').json();
 const Story = require('../models/Story');
 const mustBeUser = require('./mustBeUser.middleware');
 

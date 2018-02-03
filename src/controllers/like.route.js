@@ -2,7 +2,7 @@ const express = require('express');
 const Story = require('../models/Story');
 const Comment = require('../models/Comment');
 const mustBeUser = require('./mustBeUser.middleware');
-const parser = require('body-parser').urlencoded({ extended: false });
+const parser = require('body-parser').json();
 
 const router = express.Router();
 

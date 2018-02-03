@@ -16,7 +16,6 @@ describe('Test POST /story', () => {
         const response = await request(app)
         .post('/story')
         .set({ token })
-        .type('form')
         .send({ content: 'Javascript', title: 'JS' });
         assert.equal(response.status, 200);
         assert.equal(response.body.success, true);
@@ -30,7 +29,6 @@ describe('Test POST /story', () => {
     it('Cannot add new story without token', async () => {
         const response = await request(app)
         .post('/story')
-        .type('form')
         .send({ content: 'Javascript', title: 'JS' });
         assert.equal(response.status, 400);
     });

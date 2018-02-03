@@ -5,7 +5,7 @@ const User = require('../../../src/models/User');
 const Comment = require('../../../src/models/Comment');
 const app = require('../../../src/app');
 
-describe.only('POST /like/:idObject', () => {
+describe('POST /like/:idObject', () => {
     let token1, token2, storyId, commentId;
 
     beforeEach('Create user for test', async () => {
@@ -26,7 +26,6 @@ describe.only('POST /like/:idObject', () => {
         const response = await request(app)
         .post(`/like/${commentId}`)
         .set({ token: token1 })
-        .type('form')
         .send({ forComment: true });
         assert.equal(response.body.success, true);
     });
