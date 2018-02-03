@@ -19,4 +19,10 @@ userRoute.post('/signin', parser, (req, res) => {
     .catch(error => res.send({ success: false, message: error.message }));
 });
 
+userRoute.post('/check', (req, res) => {
+    User.check(req.headers.token)
+    .then(user => res.send({ success: true, user }))
+    .catch(error => res.send({ success: false, message: error.message }));
+});
+
 module.exports = userRoute;

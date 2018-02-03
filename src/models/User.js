@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { hash, compare } = require('bcrypt');
-const { sign } = require('../lib/jwt');
+const { sign, verify } = require('../lib/jwt');
 
 const userSchema = new mongoose.Schema({
     email: { type: String, required: true, trim: true, unique: true },
@@ -25,6 +25,17 @@ class User extends UserModel {
         if (!user) throw new Error('Cannot find user');
         const same = await compare(password, user.password);
         if (!same) throw new Error('Password is incorrect');
+        const u = user.toObject();
+        delete u.password;
+        const token = await sign({ _id: u._id });
+        u.token = token;
+        return u;
+    }
+
+    static async check(oldToken) {
+        const { _id } = await verify(oldToken);
+        const user = await User.findById(_id);
+        if (!user) throw new Error('Cannot find user');
         const u = user.toObject();
         delete u.password;
         const token = await sign({ _id: u._id });
